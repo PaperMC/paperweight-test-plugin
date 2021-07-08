@@ -22,19 +22,19 @@ public final class TestPlugin extends JavaPlugin implements Listener {
     ((CraftServer) this.getServer()).getServer().vanillaCommandDispatcher.getDispatcher().register(
       literal("paperweight")
         .requires(stack -> stack.hasPermission(stack.getServer().getOperatorUserPermissionLevel()))
-        .then(argument("players", players()))
-        .executes(ctx -> {
-          final Collection<ServerPlayer> players = EntityArgument.getPlayers(ctx, "players");
-          for (final ServerPlayer player : players) {
-            player.sendMessage(
-              new TextComponent("Hello from Paperweight test plugin!")
-                .withStyle(ChatFormatting.ITALIC, ChatFormatting.GREEN)
-                .withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/paperweight @a"))),
-              Util.NIL_UUID
-            );
-          }
-          return players.size();
-        })
+        .then(argument("players", players())
+          .executes(ctx -> {
+            final Collection<ServerPlayer> players = EntityArgument.getPlayers(ctx, "players");
+            for (final ServerPlayer player : players) {
+              player.sendMessage(
+                new TextComponent("Hello from Paperweight test plugin!")
+                  .withStyle(ChatFormatting.ITALIC, ChatFormatting.GREEN)
+                  .withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/paperweight @a"))),
+                Util.NIL_UUID
+              );
+            }
+            return players.size();
+          }))
     );
   }
 }
