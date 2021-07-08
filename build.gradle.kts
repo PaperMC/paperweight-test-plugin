@@ -1,4 +1,5 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder
+import xyz.jpenilla.runpaper.task.RunServerTask
 
 plugins {
   `java-library`
@@ -35,6 +36,11 @@ tasks {
   runServer {
     minecraftVersion("1.17.1")
     pluginJars.from(reobfJar.flatMap { it.outputJar })
+  }
+  register<RunServerTask>("runMojangMappedServer") {
+    minecraftVersion("1.17.1")
+    pluginJars.from(jar.flatMap { it.archiveFile })
+    paperclip(layout.file(configurations.mojangMappedServer.map { it.singleFile }))
   }
 }
 
