@@ -1,0 +1,113 @@
+From fb950cd96500ed930aa561c5f03e777a6c9cec24 Mon Sep 17 00:00:00 2001
+From: Jason Penilla <11360596+jpenilla@users.noreply.github.com>
+Date: Thu, 8 Jul 2021 19:56:34 -0700
+Subject: [PATCH] Setup dev bundle publishing
+
+Gradle property `publishDevBundle` must be set to publish the dev bundle, ex `./gradlew publishToMavenLocal -PpublishDevBundle`. Patches must be already applied in order to generate the dev bundle.
+---
+ build.gradle.kts    | 49 ++++++++++++++++++++++++++-------------------
+ settings.gradle.kts |  1 +
+ 2 files changed, 29 insertions(+), 21 deletions(-)
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index cf0754603..23db4352c 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -1,7 +1,8 @@
+ plugins {
+     java
++    `maven-publish`
+     id("com.github.johnrengelman.shadow") version "7.0.0" apply false
+-    id("io.papermc.paperweight.core") version "1.1.8"
++    id("io.papermc.paperweight.core") version "1.1.9-LOCAL-SNAPSHOT"
+ }
+ 
+ subprojects {
+@@ -25,16 +26,6 @@ subprojects {
+         filteringCharset = Charsets.UTF_8.name()
+     }
+ 
+-    configure<PublishingExtension> {
+-        repositories {
+-            maven {
+-                name = "paperSnapshots"
+-                url = uri("https://papermc.io/repo/repository/maven-snapshots/")
+-                credentials(PasswordCredentials::class)
+-            }
+-        }
+-    }
+-
+     if (name == "Paper-MojangAPI") {
+         return@subprojects
+     }
+@@ -58,16 +49,6 @@ repositories {
+             onlyForConfigurations("paperclip")
+         }
+     }
+-    maven("https://maven.quiltmc.org/repository/release/") {
+-        content {
+-            onlyForConfigurations("paramMappings", "remapper")
+-        }
+-    }
+-    maven("https://files.minecraftforge.net/maven/") {
+-        content {
+-            onlyForConfigurations("decompiler")
+-        }
+-    }
+ }
+ 
+ dependencies {
+@@ -85,6 +66,10 @@ paperweight {
+         spigotApiPatchDir.set(layout.projectDirectory.dir("patches/api"))
+         spigotServerPatchDir.set(layout.projectDirectory.dir("patches/server"))
+ 
++        paramMappingsRepo.set("https://maven.quiltmc.org/repository/release/")
++        remapRepo.set("https://maven.quiltmc.org/repository/release/")
++        decompileRepo.set("https://files.minecraftforge.net/maven/")
++
+         mappingsPatch.set(layout.projectDirectory.file("build-data/mappings-patch.tiny"))
+         reobfMappingsPatch.set(layout.projectDirectory.file("build-data/reobf-mappings-patch.tiny"))
+ 
+@@ -104,6 +89,28 @@ paperweight {
+     }
+ }
+ 
++publishing {
++    if (project.hasProperty("publishDevBundle")) {
++        publications.create<MavenPublication>("devBundle") {
++            artifact(tasks.generateDevelopmentBundle) {
++                artifactId = "dev-bundle"
++            }
++        }
++    }
++}
++
++allprojects {
++    publishing {
++        repositories {
++            maven {
++                name = "paperSnapshots"
++                url = uri("https://papermc.io/repo/repository/maven-snapshots/")
++                credentials(PasswordCredentials::class)
++            }
++        }
++    }
++}
++
+ tasks.register("printMinecraftVersion") {
+     doLast {
+         println(providers.gradleProperty("mcVersion").get().trim())
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index 4127fc6b8..d6ffb3730 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -1,5 +1,6 @@
+ pluginManagement {
+     repositories {
++        mavenLocal()
+         gradlePluginPortal()
+         maven("https://papermc.io/repo/repository/maven-public/")
+     }
+-- 
+2.32.0
+
