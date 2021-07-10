@@ -15,8 +15,6 @@ repositories {
   mavenLocal() {
     content { includeGroup("io.papermc.paper") }
   }
-  mavenCentral()
-  maven("https://papermc.io/repo/repository/maven-public/")
 }
 
 dependencies {
@@ -47,14 +45,14 @@ tasks {
   // Task to run obfuscated/production server and plugin
   runServer {
     minecraftVersion("1.17.1")
-    pluginJars.from(reobfJar.flatMap { it.outputJar })
+    pluginJars(reobfJar.flatMap { it.outputJar })
   }
 
   // Task to run mojang mapped/dev server and plugin
   register<RunServerTask>("runMojangMappedServer") {
     minecraftVersion("1.17.1")
-    pluginJars.from(jar.flatMap { it.archiveFile })
-    paperclip(layout.file(configurations.mojangMappedServer.map { it.singleFile }))
+    pluginJars(jar.flatMap { it.archiveFile })
+    paperclip(paperweight.mojangMappedPaperServerJar)
   }
 }
 
