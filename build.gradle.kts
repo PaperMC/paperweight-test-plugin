@@ -52,7 +52,7 @@ tasks {
   register<RunServerTask>("runMojangMappedServer") {
     minecraftVersion("1.17.1")
     pluginJars(jar.flatMap { it.archiveFile })
-    paperclip(paperweight.mojangMappedPaperServerJar)
+    paperclip(paperweight.mojangMappedServerJar)
   }
 }
 
