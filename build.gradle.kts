@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-  paperweightDevBundle("1.17.1-R0.1-SNAPSHOT")
+  paperDevBundle("1.17.1-R0.1-SNAPSHOT")
 }
 
 runPaper {
