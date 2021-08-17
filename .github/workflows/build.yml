@@ -25,15 +25,5 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Build Paper
-        run: |
-          git clone https://github.com/PaperMC/Paper.git
-          cd Paper
-          git config --global user.email "no-reply@github.com"
-          git config --global user.name "Github Actions"
-          git switch userdev
-          ./gradlew applyPatches --stacktrace
-          ./gradlew build --stacktrace
-          ./gradlew publishDevBundlePublicationToMavenLocal -PpublishDevBundle --stacktrace
       - name: Build
         run: ./gradlew build --stacktrace
