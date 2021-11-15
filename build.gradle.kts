@@ -2,6 +2,9 @@ plugins {
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.5.12"
   id("xyz.jpenilla.run-paper") version "2.2.3" // Adds runServer and runMojangMappedServer tasks for testing
+
+  // Shades and relocates dependencies into our plugin jar. See https://imperceptiblethoughts.com/shadow/introduction/
+  id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "io.papermc.paperweight"
@@ -17,6 +20,11 @@ dependencies {
   paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
   // paperweight.foliaDevBundle("1.20.4-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.20.4-R0.1-SNAPSHOT")
+
+  // Shadow will include the runtimeClasspath by default, which implementation adds to.
+  // Dependencies you don't want to include go in the compileOnly configuration.
+  // Make sure to relocate shaded dependencies!
+  implementation("cloud.commandframework", "cloud-paper", "1.8.4")
 }
 
 tasks {
@@ -56,4 +64,13 @@ tasks {
     outputJar.set(layout.buildDirectory.file("libs/PaperweightTestPlugin-${project.version}.jar"))
   }
    */
+
+  shadowJar {
+    // helper function to relocate a package into our package
+    fun reloc(pkg: String) = relocate(pkg, "io.papermc.paperweight.testplugin.dependency.$pkg")
+
+    // relocate cloud and it's transitive dependencies
+    reloc("cloud.commandframework")
+    reloc("io.leangen.geantyref")
+  }
 }
