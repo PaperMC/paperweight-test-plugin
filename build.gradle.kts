@@ -5,6 +5,9 @@ plugins {
   id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
   id("xyz.jpenilla.run-paper") version "3.0.2" // Adds runServer and runMojangMappedServer tasks for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.3.0" // Generates plugin.yml based on the Gradle config
+
+  // Shades and relocates dependencies into our plugin jar. See https://gradleup.com/shadow/
+  id("com.gradleup.shadow") version "9.2.2"
 }
 
 group = "io.papermc.paperweight"
@@ -29,6 +32,11 @@ dependencies {
   paperweight.paperDevBundle("1.21.10-R0.1-SNAPSHOT")
   // paperweight.foliaDevBundle("1.21.10-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.21.10-R0.1-SNAPSHOT")
+
+  // Shadow will include the runtimeClasspath by default, which implementation adds to.
+  // Dependencies you don't want to include go in the compileOnly configuration.
+  // Make sure to relocate shaded dependencies!
+  implementation("org.incendo", "cloud-paper", "2.0.0-beta.13")
 }
 
 tasks {
@@ -49,6 +57,21 @@ tasks {
     outputJar = layout.buildDirectory.file("libs/PaperweightTestPlugin-${project.version}.jar")
   }
    */
+
+  shadowJar {
+    // helper function to relocate a package into our package
+    fun reloc(pkg: String) = relocate(pkg, "io.papermc.paperweight.testplugin.dependency.$pkg")
+
+    // relocate cloud and it's transitive dependencies
+    reloc("org.incendo.cloud")
+    reloc("io.leangen.geantyref")
+
+    mergeServiceFiles()
+    // Needed for mergeServiceFiles to work properly in Shadow 9+
+    filesMatching("META-INF/services/**") {
+      duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+  }
 }
 
 // Configure plugin.yml generation
