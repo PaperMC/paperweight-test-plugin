@@ -11,6 +11,10 @@ group = "io.papermc.paperweight"
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
+java {
+  toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
 dependencies {
   paperDevBundle("1.17.1-R0.1-SNAPSHOT")
 }
