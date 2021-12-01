@@ -2,8 +2,8 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.2.0"
-  id("xyz.jpenilla.run-paper") version "1.0.4" // Adds runServer and runMojangMappedServer tasks for testing
+  id("io.papermc.paperweight.userdev") version "1.3.0"
+  id("xyz.jpenilla.run-paper") version "1.0.5" // Adds runServer and runMojangMappedServer tasks for testing
   id("net.minecrell.plugin-yml.bukkit") version "0.5.0"
 }
 
@@ -16,7 +16,7 @@ java {
 }
 
 dependencies {
-  paperDevBundle("1.17.1-R0.1-SNAPSHOT")
+  paperDevBundle("1.18-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -27,7 +27,7 @@ tasks {
 
   compileJava {
     options.encoding = Charsets.UTF_8.name()
-    options.release.set(16)
+    options.release.set(17)
   }
   javadoc {
     options.encoding = Charsets.UTF_8.name()
