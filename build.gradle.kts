@@ -40,6 +40,6 @@ tasks {
 bukkit {
   load = BukkitPluginDescription.PluginLoadOrder.STARTUP
   main = "io.papermc.paperweight.testplugin.TestPlugin"
-  apiVersion = "1.17"
+  apiVersion = "1.18"
   authors = listOf("Author")
 }
