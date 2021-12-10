@@ -3,7 +3,7 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 plugins {
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.3.1"
-  id("xyz.jpenilla.run-paper") version "1.0.5" // Adds runServer and runMojangMappedServer tasks for testing
+  id("xyz.jpenilla.run-paper") version "1.0.6" // Adds runServer and runMojangMappedServer tasks for testing
   id("net.minecrell.plugin-yml.bukkit") version "0.5.1" // Generates plugin.yml
 }
 
