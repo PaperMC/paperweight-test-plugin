@@ -2,7 +2,7 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.3.2"
+  id("io.papermc.paperweight.userdev") version "1.3.3"
   id("xyz.jpenilla.run-paper") version "1.0.6" // Adds runServer and runMojangMappedServer tasks for testing
   id("net.minecrell.plugin-yml.bukkit") version "0.5.1" // Generates plugin.yml
 }
@@ -27,7 +27,7 @@ dependencies {
 
 tasks {
   // Configure reobfJar to run when invoking the build task
-  build {
+  assemble {
     dependsOn(reobfJar)
   }
 
