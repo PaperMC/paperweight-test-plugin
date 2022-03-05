@@ -7,7 +7,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
-import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
