@@ -17,12 +17,12 @@ java {
 }
 
 dependencies {
-  paperDevBundle("1.18.2-R0.1-SNAPSHOT")
-  // paperweightDevBundle("com.example.paperfork", "1.18.2-R0.1-SNAPSHOT")
+  paperDevBundle("1.19-R0.1-SNAPSHOT")
+  // paperweightDevBundle("com.example.paperfork", "1.19-R0.1-SNAPSHOT")
 
   // You will need to manually specify the full dependency if using the groovy gradle dsl
   // (paperDevBundle and paperweightDevBundle functions do not work in groovy)
-  // paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.18.2-R0.1-SNAPSHOT")
+  // paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.19-R0.1-SNAPSHOT")
 }
 
 tasks {
