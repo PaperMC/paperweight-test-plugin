@@ -1,7 +1,8 @@
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.12"
+  id("io.papermc.paperweight.userdev")
   id("xyz.jpenilla.run-paper") version "2.2.3" // Adds runServer and runMojangMappedServer tasks for testing
+  `remap-plugin-src`
 }
 
 group = "io.papermc.paperweight"
