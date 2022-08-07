@@ -2,7 +2,7 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.3.7"
+  id("io.papermc.paperweight.userdev") version "1.3.8"
   id("xyz.jpenilla.run-paper") version "1.0.6" // Adds runServer and runMojangMappedServer tasks for testing
   id("net.minecrell.plugin-yml.bukkit") version "0.5.2" // Generates plugin.yml
 }
@@ -17,12 +17,12 @@ java {
 }
 
 dependencies {
-  paperDevBundle("1.19-R0.1-SNAPSHOT")
-  // paperweightDevBundle("com.example.paperfork", "1.19-R0.1-SNAPSHOT")
+  paperDevBundle("1.19.2-R0.1-SNAPSHOT")
+  // paperweightDevBundle("com.example.paperfork", "1.19.2-R0.1-SNAPSHOT")
 
   // You will need to manually specify the full dependency if using the groovy gradle dsl
   // (paperDevBundle and paperweightDevBundle functions do not work in groovy)
-  // paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.19-R0.1-SNAPSHOT")
+  // paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.19.2-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -58,6 +58,6 @@ tasks {
 bukkit {
   load = BukkitPluginDescription.PluginLoadOrder.STARTUP
   main = "io.papermc.paperweight.testplugin.TestPlugin"
-  apiVersion = "1.18"
+  apiVersion = "1.19"
   authors = listOf("Author")
 }
