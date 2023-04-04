@@ -2,7 +2,7 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.3"
+  id("io.papermc.paperweight.userdev") version "1.5.4"
   id("xyz.jpenilla.run-paper") version "2.0.1" // Adds runServer and runMojangMappedServer tasks for testing
   id("net.minecrell.plugin-yml.bukkit") version "0.5.3" // Generates plugin.yml
 }
@@ -18,6 +18,7 @@ java {
 
 dependencies {
   paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
+  // paperweight.foliaDevBundle("1.19.4-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.19.4-R0.1-SNAPSHOT")
 }
 
