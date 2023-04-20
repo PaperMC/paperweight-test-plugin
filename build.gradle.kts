@@ -1,10 +1,7 @@
-import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
-
 plugins {
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.5.4"
   id("xyz.jpenilla.run-paper") version "2.0.1" // Adds runServer and runMojangMappedServer tasks for testing
-  id("net.minecrell.plugin-yml.bukkit") version "0.5.3" // Generates plugin.yml
 }
 
 group = "io.papermc.paperweight"
@@ -40,6 +37,15 @@ tasks {
   }
   processResources {
     filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
+    val props = mapOf(
+      "name" to project.name,
+      "version" to project.version,
+      "description" to project.description,
+      "apiVersion" to "1.19"
+    )
+    filesMatching("plugin.yml") {
+      expand(props)
+    }
   }
 
   /*
@@ -49,12 +55,4 @@ tasks {
     outputJar.set(layout.buildDirectory.file("libs/PaperweightTestPlugin-${project.version}.jar"))
   }
    */
-}
-
-// Configure plugin.yml generation
-bukkit {
-  load = BukkitPluginDescription.PluginLoadOrder.STARTUP
-  main = "io.papermc.paperweight.testplugin.TestPlugin"
-  apiVersion = "1.19"
-  authors = listOf("Author")
 }
