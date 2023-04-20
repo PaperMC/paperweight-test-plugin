@@ -43,6 +43,7 @@ tasks {
       "description" to project.description,
       "apiVersion" to "1.19"
     )
+    inputs.properties(props)
     filesMatching("plugin.yml") {
       expand(props)
     }
