@@ -1,7 +1,7 @@
 plugins {
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.5.5"
-  id("xyz.jpenilla.run-paper") version "2.0.1" // Adds runServer and runMojangMappedServer tasks for testing
+  id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
 }
 
 group = "io.papermc.paperweight"
@@ -14,9 +14,9 @@ java {
 }
 
 dependencies {
-  paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
-  // paperweight.foliaDevBundle("1.19.4-R0.1-SNAPSHOT")
-  // paperweight.devBundle("com.example.paperfork", "1.19.4-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.20-R0.1-SNAPSHOT")
+  // paperweight.foliaDevBundle("1.20-R0.1-SNAPSHOT")
+  // paperweight.devBundle("com.example.paperfork", "1.20-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -41,7 +41,7 @@ tasks {
       "name" to project.name,
       "version" to project.version,
       "description" to project.description,
-      "apiVersion" to "1.19"
+      "apiVersion" to "1.20"
     )
     inputs.properties(props)
     filesMatching("plugin.yml") {
