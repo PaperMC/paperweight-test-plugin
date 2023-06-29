@@ -5,4 +5,4 @@ description: $description
 load: STARTUP
 authors:
   - Author
-api-version: $apiVersion
+api-version: "$apiVersion"
