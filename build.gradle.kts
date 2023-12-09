@@ -1,6 +1,6 @@
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.10"
+  id("io.papermc.paperweight.userdev") version "1.5.11"
   id("xyz.jpenilla.run-paper") version "2.2.2" // Adds runServer and runMojangMappedServer tasks for testing
 }
 
@@ -14,9 +14,9 @@ java {
 }
 
 dependencies {
-  paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
-  // paperweight.foliaDevBundle("1.20.2-R0.1-SNAPSHOT")
-  // paperweight.devBundle("com.example.paperfork", "1.20.2-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+  // paperweight.foliaDevBundle("1.20.4-R0.1-SNAPSHOT")
+  // paperweight.devBundle("com.example.paperfork", "1.20.4-R0.1-SNAPSHOT")
 }
 
 tasks {
