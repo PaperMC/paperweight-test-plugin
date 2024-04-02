@@ -1,8 +1,0 @@
-name: $name
-version: $version
-main: io.papermc.paperweight.testplugin.TestPlugin
-description: $description
-load: STARTUP
-authors:
-  - Author
-api-version: "$apiVersion"
