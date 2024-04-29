@@ -2,7 +2,7 @@ import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.6.0"
+  id("io.papermc.paperweight.userdev") version "1.6.3"
   id("xyz.jpenilla.run-paper") version "2.2.4" // Adds runServer and runMojangMappedServer tasks for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
 }
