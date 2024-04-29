@@ -61,5 +61,5 @@ bukkitPluginYaml {
   main = "io.papermc.paperweight.testplugin.TestPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Author")
-  apiVersion = "1.20"
+  apiVersion = "1.20.5"
 }
