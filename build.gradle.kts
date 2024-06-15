@@ -30,9 +30,9 @@ tasks.assemble {
  */
 
 dependencies {
-  paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
-  // paperweight.foliaDevBundle("1.20.6-R0.1-SNAPSHOT")
-  // paperweight.devBundle("com.example.paperfork", "1.20.6-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
+  // paperweight.foliaDevBundle("1.21-R0.1-SNAPSHOT")
+  // paperweight.devBundle("com.example.paperfork", "1.21-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -61,5 +61,5 @@ bukkitPluginYaml {
   main = "io.papermc.paperweight.testplugin.TestPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Author")
-  apiVersion = "1.20.5"
+  apiVersion = "1.21"
 }
