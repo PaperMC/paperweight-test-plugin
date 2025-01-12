@@ -9,7 +9,7 @@ plugins {
   id("com.gradleup.shadow") version "8.3.5"
 }
 
-java.disableAutoTargetJvm() // Allow consuming JVM 21 projects (i.e. paper_1_21_4) even though our release is 17
+java.disableAutoTargetJvm() // Allow consuming JVM 21 projects (i.e. paper_1_21_5) even though our release is 17
 
 dependencies {
   compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
