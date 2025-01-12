@@ -1,61 +1,72 @@
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import xyz.jpenilla.runpaper.task.RunServer
 
 plugins {
-  `java-library`
-  id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
-  id("xyz.jpenilla.run-paper") version "3.0.2" // Adds runServer and runMojangMappedServer tasks for testing
+  `my-conventions`
+  id("io.papermc.paperweight.userdev") version "2.0.0-beta.19" apply false
+  id("xyz.jpenilla.run-paper") version "3.0.2" // Adds runServer task for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.3.0" // Generates plugin.yml based on the Gradle config
+  id("com.gradleup.shadow") version "9.2.2"
 }
 
-group = "io.papermc.paperweight"
-version = "1.0.0-SNAPSHOT"
-description = "Test plugin for paperweight-userdev"
-
-java {
-  // Configure the java toolchain. This allows gradle to auto-provision JDK 21 on systems that only have JDK 11 installed for example.
-  toolchain.languageVersion = JavaLanguageVersion.of(21)
-}
-
-// For 1.20.4 or below, or when you care about supporting Spigot on >=1.20.5:
-/*
-paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
-
-tasks.assemble {
-  dependsOn(tasks.reobfJar)
-}
- */
+java.disableAutoTargetJvm() // Allow consuming JVM 21 projects (i.e. paper_1_21_8) even though our release is 17
 
 dependencies {
-  paperweight.paperDevBundle("1.21.10-R0.1-SNAPSHOT")
-  // paperweight.foliaDevBundle("1.21.10-R0.1-SNAPSHOT")
-  // paperweight.devBundle("com.example.paperfork", "1.21.10-R0.1-SNAPSHOT")
+  compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
+
+  implementation(project(":paper_hooks"))
+
+  // Shade the reobf variant
+  runtimeOnly(project(":paper_1_17_1", configuration = "reobf"))
+  runtimeOnly(project(":paper_1_19_4", configuration = "reobf"))
+
+  // For Paper 1.20.5+, we don't need to use the reobf variant.
+  // If you still support spigot, you will need to use the reobf variant,
+  // and remove the Mojang-mapped metadata from the manifest below.
+  runtimeOnly(project(":paper_1_21_10"))
 }
 
-tasks {
-  compileJava {
-    // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
-    // See https://openjdk.java.net/jeps/247 for more information.
-    options.release = 21
-  }
-  javadoc {
-    options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-  }
+tasks.assemble {
+  dependsOn(tasks.shadowJar)
+}
 
-  // Only relevant for 1.20.4 or below, or when you care about supporting Spigot on >=1.20.5:
-  /*
-  reobfJar {
-    // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
-    // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
-    outputJar = layout.buildDirectory.file("libs/PaperweightTestPlugin-${project.version}.jar")
+tasks.jar {
+  manifest.attributes(
+    "paperweight-mappings-namespace" to "mojang",
+  )
+}
+
+tasks.shadowJar {
+  mergeServiceFiles()
+  // Needed for mergeServiceFiles to work properly in Shadow 9+
+  filesMatching("META-INF/services/**") {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
-   */
 }
 
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = "io.papermc.paperweight.testplugin.TestPlugin"
+  main = "my.plugin.MyPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Author")
-  apiVersion = "1.21.10"
+  apiVersion = "1.17"
+}
+
+tasks.runServer {
+  minecraftVersion("1.21.10")
+}
+
+tasks.register("run1_17_1", RunServer::class) {
+  minecraftVersion("1.17.1")
+  pluginJars.from(tasks.shadowJar.flatMap { it.archiveFile })
+  runDirectory = layout.projectDirectory.dir("run1_17_1")
+  systemProperties["Paper.IgnoreJavaVersion"] = true
+}
+
+tasks.register("run1_19_4", RunServer::class) {
+  minecraftVersion("1.19.4")
+  pluginJars.from(tasks.shadowJar.flatMap { it.archiveFile })
+  runDirectory = layout.projectDirectory.dir("run1_19_4")
+  systemProperties["Paper.IgnoreJavaVersion"] = true
 }
