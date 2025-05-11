@@ -2,7 +2,7 @@ import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
 
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+  id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
   id("xyz.jpenilla.run-paper") version "2.3.1" // Adds runServer and runMojangMappedServer tasks for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.2.0" // Generates plugin.yml based on the Gradle config
 }
@@ -26,9 +26,9 @@ tasks.assemble {
  */
 
 dependencies {
-  paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
-  // paperweight.foliaDevBundle("1.21.4-R0.1-SNAPSHOT")
-  // paperweight.devBundle("com.example.paperfork", "1.21.4-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.21.5-R0.1-SNAPSHOT")
+  // paperweight.foliaDevBundle("1.21.5-R0.1-SNAPSHOT")
+  // paperweight.devBundle("com.example.paperfork", "1.21.5-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -57,5 +57,5 @@ bukkitPluginYaml {
   main = "io.papermc.paperweight.testplugin.TestPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Author")
-  apiVersion = "1.21.4"
+  apiVersion = "1.21.5"
 }

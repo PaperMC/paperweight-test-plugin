@@ -47,7 +47,7 @@ public final class TestPlugin extends JavaPlugin implements Listener {
               player.sendSystemMessage(
                 Component.literal("Hello from Paperweight test plugin!")
                   .withStyle(ChatFormatting.ITALIC, ChatFormatting.GREEN)
-                  .withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/paperweight @a")))
+                  .withStyle(style -> style.withClickEvent(new ClickEvent.RunCommand("/paperweight @a")))
               );
             }
             return players.size();
