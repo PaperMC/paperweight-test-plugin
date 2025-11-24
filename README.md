@@ -1,4 +1,9 @@
 # paperweight-test-plugin
+> [!CAUTION]
+> ## USING MINECRAFT INTERNALS
+> Using Minecraft internals is not recommended. This is because using internal code directly is not guaranteed to be stable and it changes often. This means that your plugin may break when a new version of Minecraft is released. Whenever possible, [you should use API instead of internals](https://docs.papermc.io/paper/dev/project-setup).
+> 
+> PaperMC will offer no direct support for programming against Minecraft internals.
 
 jmp's test plugin for [`paperweight-userdev`](https://github.com/PaperMC/paperweight/tree/main/paperweight-userdev) development
 
