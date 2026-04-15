@@ -1,4 +1,5 @@
 import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+import xyz.jpenilla.resourcefactory.paper.paperPluginYaml
 
 plugins {
   `java-library`
@@ -52,9 +53,9 @@ tasks {
    */
 }
 
-// Configure plugin.yml generation
+// Configure paper-plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
-bukkitPluginYaml {
+paperPluginYaml {
   main = "io.papermc.paperweight.testplugin.TestPlugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add("Author")
